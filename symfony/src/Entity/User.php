@@ -22,5 +22,10 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
         return $this->data['username'];
     }
 
+    public function getId(): ?int
+    {
+        return $this->data['user_id'];
+    }
+
     public function eraseCredentials(): void {}
 }
