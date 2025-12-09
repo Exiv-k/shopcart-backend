@@ -1,6 +1,10 @@
 # Simple PHP Shopcart backend
 
-This project includes a React backend that implements simple user login, adding/removing items to/from cart api's.
+This project includes a React backend that implements
+- user login
+- adding/removing items to/from a shopping cart
+- ADMIN user modifying product availability
+
 The frontend implementation can be found at https://github.com/Exiv-k/shopcart-react
 
 ### Prerequisites
