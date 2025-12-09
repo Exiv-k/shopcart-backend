@@ -15,4 +15,12 @@ In php bash:
 ```bash
 composer install
 ```
-The server will be listening on localhost:8080 and dabatase on localhost:8081
+
+### Configure Database
+You can import backup.sql via phpMyAdmin or
+```bash
+docker exec <db-container> mysqldump -u root -prootpass shopping > backup.sql
+```
+where ```<db-container>``` is the container id of mysql database.
+
+The server will be listening on localhost:8080 and dabatase on localhost:8081.
