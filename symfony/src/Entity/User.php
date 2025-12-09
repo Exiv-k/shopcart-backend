@@ -26,6 +26,10 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     {
         return $this->data['user_id'];
     }
+    public function getLastLogin(): ?string
+    {
+        return $this->data['last_login'];
+    }
 
     public function eraseCredentials(): void {}
 }

@@ -15,7 +15,7 @@ class DatabaseUserProvider implements UserProviderInterface
     public function loadUserByIdentifier(string $username): UserInterface
     {
         $user = $this->db->fetchOne(
-            'SELECT user_id, username, password_hash, role FROM users WHERE username = :u',
+            'SELECT user_id, username, password_hash, role, last_login FROM users WHERE username = :u',
             [':u' => $username]
         );
 
