@@ -35,7 +35,7 @@ class CartController extends AbstractController
 
         $items = $db->fetchAll(
             'SELECT ci.id, ci.product_id, ci.quantity, p.name, p.price, p.image FROM cart_items ci
-            JOIN products p ON p.id = ci.product_id WHERE ci.cart_id=:cid',
+            JOIN products p ON p.id = ci.product_id WHERE ci.cart_id=:cid AND p.active=TRUE',
             [':cid' => $cartId]
         );
 

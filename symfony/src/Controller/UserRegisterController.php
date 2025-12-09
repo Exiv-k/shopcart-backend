@@ -36,7 +36,7 @@ class UserRegisterController extends AbstractController
             ]
         );
         if ($existing !== null) {
-            return $this->json(['error' => 'Username already exists'], 400);
+            return $this->json(['error' => 'Username already exists'], 409);
         }
 
         // Add the new user

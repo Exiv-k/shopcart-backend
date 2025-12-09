@@ -14,7 +14,7 @@ class ProductController extends AbstractController
     public function list(Database $db): JsonResponse
     {
         $products = $db->fetchAll('SELECT id, name, price, stock, description, image FROM products
-        WHERE stock > 0');
+        WHERE active=TRUE');
 
         return $this->json($products);
     }
@@ -23,7 +23,7 @@ class ProductController extends AbstractController
     public function show(int $id, Database $db): JsonResponse
     {
         $product = $db->fetchOne(
-            'SELECT id, name, price, stock, description, image FROM products WHERE id=:id AND stock > 0',
+            'SELECT id, name, price, stock, description, image FROM products WHERE id=:id AND active=TRUE',
             [
                 ':id' => $id
             ]
@@ -44,7 +44,7 @@ class ProductController extends AbstractController
 
         $db->execute(
             'UPDATE products 
-            SET stock = 0 WHERE id=:id',
+            SET active=FALSE WHERE id=:id',
             [
                 ':id' => $id
             ]
