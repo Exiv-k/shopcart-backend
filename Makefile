@@ -54,6 +54,8 @@ db-import:
 	  echo "MySQL container not running. Start it with 'make up-build' or 'make up' first."; \
 	  exit 1; \
 	fi
+	@docker exec -i $(DB_CONTAINER) \
+	  mysql -u$(DB_USER) -p$(DB_PASSWORD) -e "CREATE DATABASE IF NOT EXISTS \`$(DB_NAME)\`;"
 	@echo "Importing $(BACKUP_FILE) into database '$(DB_NAME)'..."
 	@docker exec -i $(DB_CONTAINER) \
 	  mysql -u$(DB_USER) -p$(DB_PASSWORD) $(DB_NAME) < $(BACKUP_FILE)
