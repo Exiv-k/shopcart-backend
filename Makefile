@@ -8,11 +8,11 @@ DB_PASSWORD ?= rootpass
 BACKUP_FILE ?= backup.sql
 
 DB_CONTAINER := $(shell $(DOCKER_COMPOSE) ps -q $(DB_SERVICE))
-KEY_DIR = symfony/config
+KEY_DIR = config
 
 
 init: up-build composer-install jwt-keys
-	@echo: "Project Initialised."
+	@echo "Project initialised"
 
 up-build:
 	$(DOCKER_COMPOSE) up --build -d
