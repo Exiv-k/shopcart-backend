@@ -11,7 +11,7 @@ DB_CONTAINER := $(shell $(DOCKER_COMPOSE) ps -q $(DB_SERVICE))
 KEY_DIR = symfony/config
 
 
-init: up-build composer-install db-import
+init: up-build composer-install jwt-keys
 	@echo: "Project Initialised."
 
 up-build:
