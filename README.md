@@ -13,18 +13,11 @@ The frontend implementation can be found at https://github.com/Exiv-k/shopcart-r
 
 ### Installation
 ```bash
-docker compose up --build
-```
-In php bash:
-```bash
-composer install
-```
+make init
 
-### Configure Database
-You can import backup.sql via phpMyAdmin or
-```bash
-docker exec <db-container> mysqldump -u root -prootpass shopping > backup.sql
+make db-import
+
+make up-build
 ```
-where ```<db-container>``` is the container id of mysql database.
 
 The server will be listening on localhost:8080 and dabatase on localhost:8081.
