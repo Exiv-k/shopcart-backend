@@ -64,13 +64,14 @@ db-import:
 
 jwt-keys:
 	@echo "Generating JWT key pair..."
-	$(DOCKER_COMPOSE) exec $(PHP_SERVICE) bash -lc '\
-		mkdir -p $(KEY_DIR)/jwt
-		if [ ! -f $(KEY_DIR)/jwt/private.pem ]; then \
-			echo "- Creating key pairs"; \
-			openssl genrsa -out $(KEY_DIR)/private.pem 4096; \
-			openssl rsa -in $(KEY_DIR)/private.pem -pubout -out $(KEY_DIR)/jwt/public.pem; \
-		else
-			echo "Key already exists. Skipping key generation";
-		fi'
+	@$(DOCKER_COMPOSE) exec $(PHP_SERVICE) bash -c '\
+mkdir -p $(KEY_DIR)/jwt; \
+if [ ! -f $(KEY_DIR)/jwt/private.pem ]; then \
+  echo "- Creating key pairs"; \
+  openssl genrsa -out $(KEY_DIR)/jwt/private.pem 4096; \
+  openssl rsa -in $(KEY_DIR)/jwt/private.pem -pubout -out $(KEY_DIR)/jwt/public.pem; \
+else \
+  echo "Key already exists. Skipping key generation"; \
+fi'
 	@echo "JWT keys ready."
+
