@@ -8,6 +8,7 @@ DB_PASSWORD ?= rootpass
 BACKUP_FILE ?= backup.sql
 
 DB_CONTAINER := $(shell $(DOCKER_COMPOSE) ps -q $(DB_SERVICE))
+KEY_DIR = symfony/config
 
 
 init: up-build composer-install db-import
@@ -60,3 +61,16 @@ db-import:
 	@docker exec -i $(DB_CONTAINER) \
 	  mysql -u$(DB_USER) -p$(DB_PASSWORD) $(DB_NAME) < $(BACKUP_FILE)
 	@echo "Import finished."
+
+jwt-keys:
+	@echo "Generating JWT key pair..."
+	$(DOCKER_COMPOSE) exec $(PHP_SERVICE) bash -lc '\
+		mkdir -p $(KEY_DIR)/jwt
+		if [ ! -f $(KEY_DIR)/jwt/private.pem ]; then \
+			echo "- Creating key pairs"; \
+			openssl genrsa -out $(KEY_DIR)/private.pem 4096; \
+			openssl rsa -in $(KEY_DIR)/private.pem -pubout -out $(KEY_DIR)/jwt/public.pem; \
+		else
+			echo "Key already exists. Skipping key generation";
+		fi'
+	@echo "JWT keys ready."
