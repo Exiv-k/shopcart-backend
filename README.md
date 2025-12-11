@@ -28,3 +28,9 @@ username: admin1
 password: 654321
 
 or you can create new admins using phpMyAdmin on localhost:8081
+
+### If not working
+If the product pages show but you cannot log in or register, try
+```bash
+make jwt-keys
+```
